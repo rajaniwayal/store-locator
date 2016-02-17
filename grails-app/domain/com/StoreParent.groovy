@@ -1,10 +1,9 @@
 package com
 
 class StoreParent {
-    String countryName
+    String stateName
     static constraints = {
-        countryName nullable: false
+        stateName nullable: false
     }
-
-    static hasMany = [storeChild:StoreChild]
+    static hasMany = [storeChild: StoreChild]
 }

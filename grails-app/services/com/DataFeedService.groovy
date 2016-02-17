@@ -1,20 +1,151 @@
 package com
 
+import grails.transaction.Transactional
+import org.springframework.transaction.annotation.Transactional
+
+@Transactional
 class DataFeedService {
-
     def insertData(){
-        def d = StoreParent.first();
-        if (!d) {
-            StoreParent oz = new StoreParent(countryName: 'New York')
-             if (oz) {
-                oz.save();
-                 ArrayList<StoreChild> array = new ArrayList<StoreChild>();
-                 array.add(new StoreChild(storeParent: oz as StoreParent,cityName: 'abc' ,zipCode: 123));
-                 array.add(new StoreChild(storeParent: oz as StoreParent,cityName: 'aygbc' ,zipCode: 78))
+        def org = StoreParent.first();
+        if (!org) {
+            StoreParent sp = new StoreParent(stateName: "New York");
+            sp.save();
+            StoreChild.saveAll([
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Albany	             " ,zipCode:12201),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Alcove	             " ,zipCode:12007),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Altamont	         " ,zipCode:12009),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Berne	             " ,zipCode:12023),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Clarksville	         " ,zipCode:12041),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Coeymans	         " ,zipCode:12045),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Coeymans Hollow	     " ,zipCode:12046),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Cohoes	             " ,zipCode:12047),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Delmar	             " ,zipCode:12054),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Dormansville         " ,zipCode:12055),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "East Berne	         " ,zipCode:12059),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Feura Bush	         " ,zipCode:12067),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Glenmont	         " ,zipCode:12077),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Guilderland	         " ,zipCode:12084),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Guilderland Center	 " ,zipCode:12085),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Knox	             " ,zipCode:12107),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Latham	             " ,zipCode:12110),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Medusa	             " ,zipCode:12120),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Newtonville	         " ,zipCode:12128),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Preston Hollow	     " ,zipCode:12469),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Ravena	             " ,zipCode:12143),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Rensselaerville	     " ,zipCode:12147),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Selkirk	             " ,zipCode:12158),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Slingerlands	     " ,zipCode:12159),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "South Bethlehem	     " ,zipCode:12161),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Troy	             " ,zipCode:12183),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Voorheesville	     " ,zipCode:12186),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Watervliet	         " ,zipCode:12189),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Westerlo	         " ,zipCode:12193),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "New York             " ,zipCode:10001),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Cold Brook           " ,zipCode:13324),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Eagle Bay            " ,zipCode:13331),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Frankfort            " ,zipCode:13340),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Herkimer             " ,zipCode:13350),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Ilion                " ,zipCode:13357),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Jordanville          " ,zipCode:13361),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Little Falls         " ,zipCode:13365),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Middleville          " ,zipCode:13406),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Mohawk               " ,zipCode:13407),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Newport              " ,zipCode:13416),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Old Forge            " ,zipCode:13420),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Poland               " ,zipCode:13431),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Salisbury Center     " ,zipCode:13454),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Thendara             " ,zipCode:13472),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "West Winfield        " ,zipCode:13491),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Alfred               " ,zipCode:14802),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Alfred Station       " ,zipCode:14803),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Allentown            " ,zipCode:14707),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Alma                 " ,zipCode:14708),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Almond               " ,zipCode:14804),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Andover              " ,zipCode:14806),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Angelica             " ,zipCode:14709),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Belfast              " ,zipCode:14711),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Belmont              " ,zipCode:14813),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Black Creek          " ,zipCode:14714),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Bolivar              " ,zipCode:14715),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Canaseraga           " ,zipCode:14822),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Caneadea             " ,zipCode:14717),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Centerville          " ,zipCode:14029),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Ceres                " ,zipCode:14721),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Cuba                 " ,zipCode:14727),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Fillmore             " ,zipCode:14735),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Friendship           " ,zipCode:14739),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Houghton             " ,zipCode:14744),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Hume                 " ,zipCode:14745),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Little Genesee       " ,zipCode:14754),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Richburg             " ,zipCode:14774),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Rushford             " ,zipCode:14777),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Scio                 " ,zipCode:14880),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Swain                " ,zipCode:14884),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Wellsville           " ,zipCode:14895),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "West Clarksville     " ,zipCode:14786),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Whitesville          " ,zipCode:14897),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Brooklyn             " ,zipCode:11201),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Bellona              " ,zipCode:14415),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Branchport           " ,zipCode:14418),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Dresden              " ,zipCode:14441),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Dundee               " ,zipCode:14837),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Himrod               " ,zipCode:14842),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Keuka Park           " ,zipCode:14478),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Lakemont             " ,zipCode:14857),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Middlesex            " ,zipCode:14507),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Penn Yan             " ,zipCode:14527),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Rushville            " ,zipCode:14544),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Bible School Park    " ,zipCode:13737),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Binghamton           " ,zipCode:13901),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Castle Creek         " ,zipCode:13744),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Chenango Bridge      " ,zipCode:13745),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Chenango Forks       " ,zipCode:13746),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Conklin              " ,zipCode:13748),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Corbettsville        " ,zipCode:13749),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Deposit              " ,zipCode:13754),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Endicott             " ,zipCode:13760),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Endwell              " ,zipCode:13762),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Glen Aubrey          " ,zipCode:13777),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Harpursville         " ,zipCode:13787),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Johnson City         " ,zipCode:13790),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Killawog             " ,zipCode:13794),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Kirkwood             " ,zipCode:13795),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Lisle                " ,zipCode:13797),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Maine                " ,zipCode:13802),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Nineveh              " ,zipCode:13813),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Ouaquaga             " ,zipCode:13826),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Port Crane           " ,zipCode:13833),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Tunnel               " ,zipCode:13848),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Vestal               " ,zipCode:13850),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Whitney Point        " ,zipCode:13862),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Windsor              " ,zipCode:13865),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Beaver Falls         " ,zipCode:13305),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Brantingham          " ,zipCode:13312),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Castorland           " ,zipCode:13620),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Constableville       " ,zipCode:13325),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Copenhagen           " ,zipCode:13626),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Croghan              " ,zipCode:13327),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Deer River           " ,zipCode:13627),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Denmark              " ,zipCode:13631),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Glenfield            " ,zipCode:13343),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Greig                " ,zipCode:13345),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Lowville             " ,zipCode:13367),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Lyons Falls          " ,zipCode:13368),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Martinsburg          " ,zipCode:13404),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Natural Bridge       " ,zipCode:13665),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Port Leyden          " ,zipCode:13433),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "Turin                " ,zipCode:13473),
+                    new StoreChild(storeParent: sp as StoreParent ,cityName: "West Leyden          " ,zipCode:13489)
 
-            }
+            ])
+
 
         }
+
+
     }
 
+    def serviceMethod() {
+
+    }
 }

@@ -1,5 +1,6 @@
 package com
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 
 class StoreParentController {
@@ -21,6 +22,14 @@ class StoreParentController {
 
     def save() {
         def storeParentInstance = new StoreParent(params)
+        if(params.childJSON){
+            def childs = JSON.parse(params.childJSON);
+            childs.each({ c ->
+                storeParentInstance.addToStoreChild(StoreChild.saveData(c));
+            });
+        }
+
+
         if (!storeParentInstance.save(flush: true)) {
             render(view: "create", model: [storeParentInstance: storeParentInstance])
             return
@@ -63,14 +72,22 @@ class StoreParentController {
         if (version != null) {
             if (storeParentInstance.version > version) {
                 storeParentInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'storeParent.label', default: 'StoreParent')] as Object[],
-                          "Another user has updated this StoreParent while you were editing")
+                        [message(code: 'storeParent.label', default: 'StoreParent')] as Object[],
+                        "Another user has updated this StoreParent while you were editing")
                 render(view: "edit", model: [storeParentInstance: storeParentInstance])
                 return
             }
         }
 
         storeParentInstance.properties = params
+
+        if(params.childJSON){
+            StoreParent.executeUpdate("delete  StoreChild  as c where c.storeParent.id=:id", [id: storeParentInstance.id])
+            def childs = JSON.parse(params.childJSON);
+            childs.each({ c ->
+                storeParentInstance.addToStoreChild(StoreChild.saveData(c));
+            });
+        }
 
         if (!storeParentInstance.save(flush: true)) {
             render(view: "edit", model: [storeParentInstance: storeParentInstance])
@@ -97,6 +114,34 @@ class StoreParentController {
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'storeParent.label', default: 'StoreParent'), id])
             redirect(action: "show", id: id)
+        }
+    }
+
+    def itemList(){
+        def data=StoreChild.list();
+        if(data){
+            render data as JSON
+        }
+    }
+
+    def childList(){
+        def res=[];
+        if(params.id){
+            def pData=StoreParent.findById(params.id)
+            if(pData){
+                def child=StoreChild.findAllByStoreParent(pData as StoreParent)
+                if(child){
+                    child.each {e->
+                        res.push([
+                                cityName:e?.cityName?:"",
+                                zipCode:e?.zipCode?:""
+                        ])
+                    }
+                }
+            }
+            if(res){
+                render res as JSON
+            }
         }
     }
 }
